@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+        for(int i =0; i < s.size() ; i++)
+        {
+            //If the character is opening bracket push it into the satck
+            if(s[i] == '(' || s[i] == '{' || s[i] == '[')
+                st.push(s[i]);
+            else
+            {
+                //Check if stack is already empty i.e it means there is no opening bracket
+                if(st.empty())
+                    return false;
+                //Get the character from the top of the stack
+                char c = st.top();
+                // if the the opening bracket in top of the  stack and current element are of same type 
+                if((c == '(' && s[i] == ')' ) || (c == '[' && s[i] == ']') || (c == '{' && s[i] == '}'))
+                    st.pop();
+                // If the opening barcket of the same type is not present in the top of stack simply return false;
+                else 
+                    return false;
+            }
+        }
+        return st.empty();
+    }
+};
